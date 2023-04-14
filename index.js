@@ -3,6 +3,7 @@ const { Client, Events, GatewayIntentBits } = require('discord.js');
 require('dotenv/config');
 
 // Create a new client instance
+// src = https://discordjs.guide/popular-topics/intents.html#enabling-intents
 const client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds,
@@ -11,7 +12,6 @@ const client = new Client({
 		GatewayIntentBits.GuildMembers,
 	],
 });
-//src = https://discordjs.guide/popular-topics/intents.html#enabling-intents
 
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
@@ -25,3 +25,5 @@ client.on('messageCreate', (message) => {
 
 // Log in to Discord with your client's token
 client.login(process.env.TOKEN);
+
+// /quote
