@@ -1,21 +1,27 @@
-// const { Client, IntentsBitField } = require('discord.js');
-// require('dotenv/config');
-// const bot = new Client({
-
-// })
-
 // Require the necessary discord.js classes
 const { Client, Events, GatewayIntentBits } = require('discord.js');
-const { token } = require('./config.json');
+require('dotenv/config');
 
 // Create a new client instance
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildMembers,
+	],
+});
+//src = https://discordjs.guide/popular-topics/intents.html#enabling-intents
 
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
 client.once(Events.ClientReady, c => {
-	console.log(`Ready! Logged in as ${c.user.tag}`);
+    console.log(`Ready! Logged in as ${c.user.tag}`);
+});
+
+client.on('messageCreate', (message) => {
+    console.log(message);
 });
 
 // Log in to Discord with your client's token
-client.login(token);
+client.login(process.env.TOKEN);
