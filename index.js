@@ -36,7 +36,7 @@ client.on('messageCreate', async (message) => {
     message.channel.send(`${repliedMessage.content}\n -${repliedMessage.author}`);
   }
 });
-
+// why are there two instances of the same message as a reply from the bot i am very confused and infuriated
 // Log in to Discord with your client's token
 client.login(process.env.TOKEN);
 
