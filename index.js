@@ -2,10 +2,7 @@
 const { Client, Events, GatewayIntentBits } = require('discord.js');
 const { EmbedBuilder } = require('discord.js');
 require('dotenv/config');
-// const prefix = '/';
 
-// Create a new client instance
-// src = https://discordjs.guide/popular-topics/intents.html#enabling-intents
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -14,15 +11,11 @@ const client = new Client({
 	],
 });
 
-// const channel = client.channels.cache.get(process.env.CHANNELID);
-// When the client is ready, run this code (only once)
-// We use 'c' for the event parameter to keep it separate from the already defined 'client'
 client.once(Events.ClientReady, c => {
     console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
 client.on('messageCreate', async (message) => {
-  // Exit and stop if the prefix is not there or if user is a bot
   if (!message.content.startsWith(process.env.PREFIX) || message.author.bot) {
     return;
   }
@@ -33,11 +26,31 @@ client.on('messageCreate', async (message) => {
     console.log(repliedMessage.content);
     console.log(repliedMessage.author);
 
-    message.channel.send(`${repliedMessage.content}\n -${repliedMessage.author}`);
-  }
+    const embed = new EmbedBuilder()
+      .setColor(0x0099FF)
+      .setTitle('Quote')
+      .setAuthor({ name: `${repliedMessage.author.username}`})
+      .setDescription(`${repliedMessage.content}\n`)
+      .setThumbnail('https://imgur.com/t/elephant/YxcXHZS')
+      .addFields(
+        { name: 'Baam', value: 'Chor' }
+      )
+      .addFields({ name: 'Anish', value: 'Fat', inline: true })
+      .setImage('https://imgur.com/t/elephant/YxcXHZS')
+      .setTimestamp()
+      .setFooter({ text: 'made by ridim' });
+
+      client.channels.fetch(process.env.CHANNELID)
+      .then(channel => channel.send({ embeds: [embed] }));
+
+      //  message.channel.send({ embeds: [embed] });
+}
+
 });
 
-// Log in to Discord with your client's token
 client.login(process.env.TOKEN);
-
-// /quote
+// `
+/* client.channels.fetch(process.env.CHANNELID)
+      .then(channel => channel.send(embeds : [embed]));
+      */
+// `${repliedMessage.content}\n -${repliedMessage.author}`
