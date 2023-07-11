@@ -50,8 +50,3 @@ client.on('messageCreate', async (message) => {
 
 // Log in to Discord with your client's token
 client.login(process.env.TOKEN);
-// `
-/* client.channels.fetch(process.env.CHANNELID)
-      .then(channel => channel.send(embeds : [embed]));
-      */
-// `${repliedMessage.content}\n -${repliedMessage.author}`
